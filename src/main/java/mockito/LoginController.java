@@ -14,7 +14,7 @@ public class LoginController {
     public String registration(RegistrDto registrDto) {
         boolean b = loginService.checkIfExistUser(registrDto);
         if (b) {
-            return "user already exist";
+            return "User already exist";
         }
         loginService.saveUser(registrDto);
         return "suc";

@@ -37,7 +37,7 @@ public class LoginControllerTest {
         //Проверяем что метод с задаными входными параметрами возврашает результат еквивалентный заданому
         assertThat(loginService.checkIfExistUser(any()), is(equalTo(true)));
         //Проверяем что метод возврашает заданый результат
-        assertThat(loginController.registration(any()),is(equalTo("user already exist")));
+        assertThat(loginController.registration(any()),is(equalTo("User already exist")));
     }
 
     @Test
