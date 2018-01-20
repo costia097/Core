@@ -1,6 +1,7 @@
 package jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
@@ -17,6 +18,17 @@ public class Main {
         List<User> users = createUsers();
         Tuple2<CsvMapper,CsvSchema> container = createCsvMapper();
         write(container._1, container._2, users);
+        List<User> read = read(new File("temp.csv"));
+        System.out.println(read);
+    }
+
+    private static List<User> read(File csvFile) throws IOException {
+        List<User> users = new ArrayList<>();
+        MappingIterator<User> userFromFile = new CsvMapper().readerWithTypedSchemaFor(User.class).readValues(csvFile);
+        while (userFromFile.hasNext()) {
+            users.add(userFromFile.next());
+        }
+        return users;
     }
 
     private static void write(CsvMapper csvMapper, CsvSchema csvSchema, Object data) throws IOException {

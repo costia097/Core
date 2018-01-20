@@ -2,8 +2,10 @@ package jackson.pojo;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.io.Serializable;
+
 @JsonPropertyOrder({"name", "age"})
-public class User {
+public class User implements Serializable {
     private String name;
     private int age;
 
@@ -26,5 +28,13 @@ public class User {
     }
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
